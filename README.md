@@ -14,11 +14,9 @@ This project uses a fictional retail dataset containing:
 - Quantities, prices, and discounts
 - Completed, returned, and cancelled orders
 
-The analysis is designed to demonstrate practical SQL skills that are useful for Data Analyst, Reporting Analyst, Operations Analyst, and Business Intelligence roles.
-
 ## Business Questions
 
-The analysis answers questions such as:
+The analysis answers:
 
 1. How much revenue did the business generate?
 2. What are the top-performing products?
@@ -31,24 +29,5 @@ The analysis answers questions such as:
 9. Which products rank highest within each category?
 10. What business opportunities can be identified from the data?
 
-## SQL Skills Demonstrated
-
-- SELECT
-- WHERE
-- ORDER BY
-- GROUP BY
-- COUNT
-- SUM
-- AVG
-- CASE WHEN
-- JOIN
-- Common Table Expressions (CTEs)
-- DATE_TRUNC
-- EXTRACT
-- LAG
-- RANK
-- Window functions
-- NULLIF
-- Business-oriented analysis
 
 
