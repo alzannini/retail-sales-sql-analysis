@@ -1,10 +1,4 @@
--- Retail Sales SQL Analysis
--- Portfolio project: retail-sales-sql-analysis
--- SQL dialect: PostgreSQL
-
--- ============================================================
--- 1. BASIC DATA EXPLORATION
--- ============================================================
+-- BASIC DATA EXPLORATION
 
 SELECT *
 FROM orders
@@ -20,18 +14,18 @@ SELECT COUNT(*) AS total_products
 FROM products;
 
 
--- ============================================================
--- 2. TOTAL SALES
--- ============================================================
+
+-- TOTAL SALES
+
 
 SELECT
     ROUND(SUM(sales), 2) AS total_sales
 FROM orders;
 
 
--- ============================================================
--- 3. AVERAGE ORDER VALUE
--- ============================================================
+
+-- AVERAGE ORDER VALUE
+
 
 SELECT
     ROUND(AVG(sales), 2) AS average_order_value
@@ -39,19 +33,14 @@ FROM orders
 WHERE order_status = 'Completed';
 
 
--- ============================================================
--- 4. TOTAL QUANTITY SOLD
--- ============================================================
+-- TOTAL QUANTITY SOLD
 
 SELECT
     SUM(quantity) AS total_units_sold
 FROM orders
 WHERE order_status = 'Completed';
 
-
--- ============================================================
--- 5. SALES BY PRODUCT
--- ============================================================
+--  SALES BY PRODUCT
 
 SELECT
     p.product_name,
@@ -64,9 +53,7 @@ GROUP BY p.product_name
 ORDER BY total_sales DESC;
 
 
--- ============================================================
--- 6. TOP 10 PRODUCTS
--- ============================================================
+--  TOP 10 PRODUCTS
 
 SELECT
     p.product_name,
@@ -81,9 +68,7 @@ ORDER BY total_sales DESC
 LIMIT 10;
 
 
--- ============================================================
--- 7. SALES BY CATEGORY
--- ============================================================
+--  SALES BY CATEGORY
 
 SELECT
     p.category,
@@ -97,9 +82,7 @@ GROUP BY p.category
 ORDER BY total_sales DESC;
 
 
--- ============================================================
--- 8. SALES BY STATE
--- ============================================================
+--  SALES BY STATE
 
 SELECT
     c.state,
@@ -112,9 +95,7 @@ GROUP BY c.state
 ORDER BY total_sales DESC;
 
 
--- ============================================================
--- 9. SALES BY CUSTOMER SEGMENT
--- ============================================================
+-- SALES BY CUSTOMER SEGMENT
 
 SELECT
     c.segment,
@@ -128,9 +109,7 @@ GROUP BY c.segment
 ORDER BY total_sales DESC;
 
 
--- ============================================================
--- 10. MONTHLY SALES TREND
--- ============================================================
+-- MONTHLY SALES TREND
 
 SELECT
     DATE_TRUNC('month', order_date) AS month,
@@ -141,9 +120,7 @@ GROUP BY month
 ORDER BY month;
 
 
--- ============================================================
--- 11. SALES BY YEAR
--- ============================================================
+-- SALES BY YEAR
 
 SELECT
     EXTRACT(YEAR FROM order_date) AS sales_year,
@@ -154,9 +131,7 @@ GROUP BY sales_year
 ORDER BY sales_year;
 
 
--- ============================================================
--- 12. CUSTOMER SPENDING
--- ============================================================
+-- CUSTOMER SPENDING
 
 SELECT
     c.customer_id,
@@ -170,10 +145,7 @@ WHERE o.order_status = 'Completed'
 GROUP BY c.customer_id, c.customer_name, c.segment
 ORDER BY total_spent DESC;
 
-
--- ============================================================
--- 13. TOP 10 CUSTOMERS
--- ============================================================
+-- TOP 10 CUSTOMERS
 
 SELECT
     c.customer_name,
@@ -188,9 +160,8 @@ ORDER BY total_spent DESC
 LIMIT 10;
 
 
--- ============================================================
--- 14. CUSTOMER VALUE SEGMENTS
--- ============================================================
+-- CUSTOMER VALUE SEGMENTS
+
 
 WITH customer_spend AS (
     SELECT
@@ -215,9 +186,7 @@ FROM customer_spend
 ORDER BY total_spent DESC;
 
 
--- ============================================================
--- 15. ORDERS PER CUSTOMER
--- ============================================================
+-- ORDERS PER CUSTOMER
 
 SELECT
     c.customer_name,
@@ -229,9 +198,7 @@ GROUP BY c.customer_name
 ORDER BY order_count DESC;
 
 
--- ============================================================
--- 16. RETURN RATE
--- ============================================================
+-- RETURN RATE
 
 SELECT
     COUNT(*) AS total_orders,
@@ -244,9 +211,7 @@ SELECT
 FROM orders;
 
 
--- ============================================================
--- 17. SALES BY ORDER STATUS
--- ============================================================
+-- SALES BY ORDER STATUS
 
 SELECT
     order_status,
@@ -256,10 +221,7 @@ FROM orders
 GROUP BY order_status
 ORDER BY sales DESC;
 
-
--- ============================================================
--- 18. MONTH-OVER-MONTH SALES CHANGE
--- ============================================================
+-- MONTH-OVER-MONTH SALES CHANGE
 
 WITH monthly_sales AS (
     SELECT
@@ -283,9 +245,7 @@ FROM monthly_sales
 ORDER BY month;
 
 
--- ============================================================
--- 19. PRODUCT RANKING
--- ============================================================
+-- PRODUCT RANKING
 
 WITH product_sales AS (
     SELECT
@@ -306,10 +266,7 @@ SELECT
 FROM product_sales
 ORDER BY overall_rank;
 
-
--- ============================================================
--- 20. PRODUCT RANKING WITHIN CATEGORY
--- ============================================================
+-- PRODUCT RANKING WITHIN CATEGORY
 
 WITH product_sales AS (
     SELECT
@@ -334,9 +291,7 @@ FROM product_sales
 ORDER BY category, category_rank;
 
 
--- ============================================================
--- 21. FINAL BUSINESS SUMMARY
--- ============================================================
+-- FINAL BUSINESS SUMMARY
 
 SELECT
     ROUND(SUM(sales), 2) AS total_completed_sales,
